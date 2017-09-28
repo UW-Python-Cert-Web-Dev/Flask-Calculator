@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>Calculator</title>
+</head>
+<body>
+    <nav>
+            <a href="{{ url_for('add') }}">All tasks</a>
+            <a href="{{ url_for('retrieve') }}">Retrieve a total</a>
+            <a href="{{ url_for('save') }}">Save your total</a>
+    </nav>
+    <br>
+    <h1>Calculator</h1>
+    <h2>{% block subtitle %} {% endblock subtitle %}</h2>
+    {% block content %} {% endblock content %}
+</body>
+</html>
