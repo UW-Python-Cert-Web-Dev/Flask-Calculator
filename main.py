@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+import base64
 
 from flask import Flask, render_template, request, redirect, url_for, session
 
@@ -37,18 +38,15 @@ def retrieve():
     return render_template('retrieve.jinja2', tasks=Task.select().where(Task.performed.is_null()))
 
 
-@app.route('/save', methods=['GET', 'POST'])
+@app.route('/save', methods=['POST'])
 def save():
-    if 'username' not in session:
-        return redirect(url_for('login'))
+    total = session.get('total', 0)
+    code = base64.b32encode(os.urandom(8)).decode().strip("=")
 
-    if request.method == 'POST':
-        task = Task(name=request.form['name'])
-        task.save()
+    saved_total = SavedTotal(value=total, code=code)
+    saved_total.save()
 
-        return redirect(url_for('all_tasks'))
-    else:
-        return render_template('create.jinja2')
+    return render_template('save.jinja2', code=code)
 
 
 

@@ -12,7 +12,7 @@ db = connect(os.environ.get('DATABASE_URL', 'sqlite:///my_database.db'))
 
 
 class SavedTotal(Model):
-    name = CharField(max_length=255, unique=True)
+    code = CharField(max_length=255, unique=True)
     value = IntegerField(max_length=255)
 
     class Meta:
