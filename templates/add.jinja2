@@ -3,7 +3,7 @@
 {% block subtitle %}Add them up!{% endblock subtitle %}
 
 {% block content %}
-    <p>Total: {% if session.total %}{{ session.total }}{% else %}0{% endif %}</p>
+    <p>Total: <span id="total">{% if session.total %}{{ session.total }}{% else %}0{% endif %}</span></p>
     <form method="POST">
         <label for="number">Number: </label><input type="number" id="number" name="number">
         <input type="submit" value="Add It!">
