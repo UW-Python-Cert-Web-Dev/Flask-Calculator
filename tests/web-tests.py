@@ -40,3 +40,24 @@ class WebTests(unittest.TestCase):
 
         # The total is now 15
         self.assertEqual(15, self.getTotal())
+
+    def testSaveAndRetrieve(self):
+        self.browser.get('http://localhost:5000/add')
+
+        # The total should be zero
+        self.assertEqual(0, self.getTotal())
+
+        # Add the number 5
+        self.browser.find_element_by_css_selector('input[name="name"]').send_keys("7")
+        self.browser.find_element_by_css_selector('input[type="submit"]').click()
+
+        # We are brought back to the add page
+        self.assertIn("/add", self.browser.current_url)
+
+        # The total is now 5
+        self.assertEqual(7, self.getTotal())
+
+        # Visit the link to save the score
+        self.browser.find_element_by_css_selector('input[type="submit"]').click()
+
+        self.fail("Complete this test")
